@@ -4,24 +4,24 @@ services:
   - docker
 
 before_install:
-  - docker build -t hero/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t hero0926/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true hero/react-test npm test
+  - docker run -e CI=true hero0926/react-test npm test
 
 after_success:
-  - docker build -t hero/multi-client ./client
-  - docker build -t hero/multi-nginx ./nginx
-  - docker build -t hero/multi-server ./server
-  - docker build -t hero/multi-worker ./worker
+  - docker build -t hero0926/multi-client ./client
+  - docker build -t hero0926/multi-nginx ./nginx
+  - docker build -t hero0926/multi-server ./server
+  - docker build -t hero0926/multi-worker ./worker
 
 # log in to the docker cli
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 # take those images and push them to docker hub
-  - docker push hero/multi-client
-  - docker push hero/multi-nginx
-  - docker push hero/multi-server
-  - docker push hero/multi-worker
+  - docker push hero0926/multi-client
+  - docker push hero0926/multi-nginx
+  - docker push hero0926/multi-server
+  - docker push hero0926/multi-worker
 
 # deploy:
 #   provider: elasticbeanstalk
